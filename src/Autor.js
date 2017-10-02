@@ -15,9 +15,12 @@ class FormularioAutor extends Component {
     };
 
     this.enviaForm = this.enviaForm.bind(this);
-    this.setNome = this.setNome.bind(this);
-    this.setEmail = this.setEmail.bind(this);
-    this.setSenha = this.setSenha.bind(this);
+  }
+
+  salvaAlteracao(nomeInput,evento){
+    const campo = {};
+    campo[nomeInput] = evento.target.value;
+    this.setState(campo);
   }
 
   enviaForm(event) {
@@ -46,18 +49,6 @@ class FormularioAutor extends Component {
       });
   }
 
-  setNome(evento) {
-    this.setState({ nome: evento.target.value });
-  }
-
-  setEmail(evento) {
-    this.setState({ email: evento.target.value });
-  }
-
-  setSenha(evento) {
-    this.setState({ senha: evento.target.value });
-  }
-
   render() {
     return (
       <div
@@ -72,7 +63,7 @@ class FormularioAutor extends Component {
               type="text"
               name="nome"
               value={this.state.nome}
-              onChange={this.setNome}
+              onChange={this.salvaAlteracao.bind(this, 'nome')}
               label="Nome"
             />
             <InputCustomizado
@@ -80,7 +71,7 @@ class FormularioAutor extends Component {
               type="email"
               name="email"
               value={this.state.email}
-              onChange={this.setEmail}
+              onChange={this.salvaAlteracao.bind(this, 'email')}
               label="Email"
             />
             <InputCustomizado
@@ -88,7 +79,7 @@ class FormularioAutor extends Component {
               type="password"
               name="senha"
               value={this.state.senha}
-              onChange={this.setSenha}
+              onChange={this.salvaAlteracao.bind(this, 'senha')}
               label="Senha"
             />
           </div>

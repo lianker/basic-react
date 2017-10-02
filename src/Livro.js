@@ -43,22 +43,13 @@ class FormLivros extends Component {
     super();
     this.state = { titulo: "", preco: "",autorId:''};
 
-    this.setTitulo = this.setTitulo.bind(this);
-    this.setPreco = this.setPreco.bind(this);
-    this.setAutorId = this.setAutorId.bind(this);
     this.enviaForm = this.enviaForm.bind(this);
   }
 
-  setTitulo(evento) {
-    this.setState({ titulo: evento.target.value });
-  }
-  
-  setAutorId(evento) {
-    this.setState({autorId:evento.target.value});
-  }
-
-  setPreco(evento) {
-    this.setState({ preco: evento.target.value });
+  salvaAlteracao(nomeInput,evento){
+    const campo = {};
+    campo[nomeInput] = evento.target.value;
+    this.setState(campo);
   }
 
   enviaForm(event) {
@@ -101,7 +92,7 @@ class FormLivros extends Component {
               type="text"
               name="titulo"
               value={this.state.titulo}
-              onChange={this.setTitulo}
+              onChange={this.salvaAlteracao.bind(this, "titulo")}              
               label="Titulo"
             />
             <InputCustomizado
@@ -109,13 +100,13 @@ class FormLivros extends Component {
               type="number"
               name="preco"
               value={this.state.preco}
-              onChange={this.setPreco}
+              onChange={this.salvaAlteracao.bind(this, "preco")}
               label="Preço"
             />
 
             <div className="pure-control-group">
               <label htmlFor="autorId">Autor</label>
-              <select id="autorID" name="autorId" onChange={this.setAutorId}>
+              <select id="autorID" name="autorId" onChange={this.salvaAlteracao.bind(this, "autorId")}>
                   <option value="">Selecione um Autor...</option>
                 {this.props.autores.map(autor => {
                   return (
